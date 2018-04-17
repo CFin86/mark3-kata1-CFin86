@@ -6,18 +6,16 @@ namespace OnboardingExperience
     {
         static void Main(string[] args)
         {
+            var ask = new Start();
+            var hasAccount = Start.accountQuestion();
 
-            var Ask = new Start();
-            var hasAccount = Ask.AccountQuestion();
+            var firstName = ask.firstNameQuestion();
 
-            var firstName = Ask.FirstNameQuestion();
+            var lastName = ask.lastNameQuestion(hasAccount, firstName);
 
-            var lastname = Ask.LastNameQuestion(hasAccount, firstName);
+            var pin = ask.pinQuestion(firstName, lastName);
 
-            var pin = Ask.PinQuestion( firstName, lastname);
-
-
-            var user = new User(hasAccount, firstName, lastname, pin);
+            var user = new User(hasAccount, firstName, lastName, pin);
             user.UserInfo();
         }
     }

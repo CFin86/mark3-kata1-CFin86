@@ -8,35 +8,32 @@ namespace OnboardingExperience
             Console.WriteLine("Hello and Welcome to the First Third TrueCoders Bank!");
         }
 
-
-        public static string Question(string question)
+        public static string question(string question)
         {
             Console.WriteLine(question);
             return Console.ReadLine();
         }
 
-
-        public bool AccountQuestion()
+        public static bool accountQuestion()
         {
-            var boolCheck = CheckFor.IsBoolean(Question("Do you have an account?"));
-            if ( boolCheck == true)
+            var boolCheck = ErrorHandling.convertStringToBool(question("Do you have an account?"));
+            if (boolCheck == true)
             {
                 Console.WriteLine("Good! Let's continue");
                 return true;
             }
             else
             {
-                AccountQuestion();
-                return false;
+                Console.WriteLine("You need an account to continue.");
+                return accountQuestion();
             }
         }
 
-
-        public string FirstNameQuestion()
+        public string firstNameQuestion()
         {
-            string fname = Question("What is your first name?");
+            string fname = question("What is your first name?");
 
-            var errorCheck = CheckFor.IsString(fname);
+            var errorCheck = ErrorHandling.isString(fname);
             if (errorCheck == true)
             {
                 Console.WriteLine($"Well, Hello there {fname}!");
@@ -44,16 +41,14 @@ namespace OnboardingExperience
             }
             else
             {
-                return FirstNameQuestion();
+                return firstNameQuestion();
             }
         }
 
-
-        public string LastNameQuestion(bool hasAccount, string fname)
+        public string lastNameQuestion(bool hasAccount, string fname)
         {
-            
-            string lname = Question("What is your last name?");
-            var errorCheck = CheckFor.IsString(lname);
+            string lname = question("What is your last name?");
+            var errorCheck = ErrorHandling.isString(lname);
             if (errorCheck == true)
             {
                 Console.WriteLine($"I am so sorry your Mother named you {fname} {lname}!");
@@ -62,23 +57,22 @@ namespace OnboardingExperience
             }
             else
             {
-                return LastNameQuestion(hasAccount, fname);
+                return lastNameQuestion(hasAccount, fname);
             }
         }
 
-
-
-        public int PinQuestion( string fname, string lname)
+        public int pinQuestion(string fname, string lname)
         {
-            string pin = Question("What is your PIN (Personal Identification Number) Number?!?!?!");
-            int pinAsaNum = CheckFor.IsValidNumber(pin);
-            if (pinAsaNum >= 0)
+            string pin = question("What is your PIN (Personal Identification Number) Number?!?!?!");
+            int pinAsaNum = ErrorHandling.isValidNumber(pin);
+            if (pinAsaNum > 0)
             {
                 return pinAsaNum;
-            } else {
-                return PinQuestion(fname, lname);
+            }
+            else
+            {
+                return pinQuestion(fname, lname);
             }
         }
-
     }
 }
